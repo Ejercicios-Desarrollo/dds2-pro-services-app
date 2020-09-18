@@ -15,8 +15,12 @@ public class RepositorioDeTrabajos extends Repository<Trabajo>{
         super(dao, classToManage);
     }
 
-    public List<Trabajo> buscarTrabajos(Integer consumidorId){
+    public List<Trabajo> buscarTrabajosPorConsumidor(Integer consumidorId){
         return this.dao.find(condicionConsumidorId(consumidorId));
+    }
+
+    public List<Trabajo> buscarTrabajosPorPrestador(Integer prestadorId){
+        return this.dao.find(condicionPrestadorId(prestadorId));
     }
 
     private BusquedaCondicional condicionConsumidorId(Integer consumidorId) {
@@ -28,6 +32,22 @@ public class RepositorioDeTrabajos extends Repository<Trabajo>{
 
         Predicate condicionConsumidorId = criteriaBuilder.equal(condicionRaiz.get("consumidor"), consumidorId);
         // t.consumidorId = ''
+
+        trabajoQuery.where(condicionConsumidorId);
+        // SELECT t.* FROM trabajo u WHERE t.consumidor_id = ''
+
+        return new BusquedaCondicional(trabajoQuery, null);
+    }
+
+    private BusquedaCondicional condicionPrestadorId(Integer prestadorId) {
+        CriteriaBuilder criteriaBuilder = criteriaBuilder();
+        CriteriaQuery<Trabajo> trabajoQuery = criteriaBuilder.createQuery(Trabajo.class);
+
+        Root<Trabajo> condicionRaiz = trabajoQuery.from(Trabajo.class);
+        // SELECT t.* FROM trabajo
+
+        Predicate condicionConsumidorId = criteriaBuilder.equal(condicionRaiz.get("prestador"), prestadorId);
+        // t.prestadorId = ''
 
         trabajoQuery.where(condicionConsumidorId);
         // SELECT t.* FROM trabajo u WHERE t.consumidor_id = ''

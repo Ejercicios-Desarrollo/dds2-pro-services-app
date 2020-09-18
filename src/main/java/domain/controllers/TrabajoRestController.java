@@ -9,17 +9,26 @@ import domain.repositories.daos.DAOHibernate;
 import spark.Request;
 import spark.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TrabajoRestController {
     public static String listar(Request request, Response response){
         RepositorioDeTrabajos repoTrabajos = new RepositorioDeTrabajos(new DAOHibernate(), Trabajo.class);
-        String consumidorId = request.queryParams("consumidorId");
-        //List<Trabajo> trabajos = repoTrabajos.findAll();
 
-        List<Trabajo> trabajos = repoTrabajos.buscarTrabajos(Integer.valueOf(consumidorId));
+        List<Trabajo> trabajos = new ArrayList<>();
 
+        String criterio = request.queryParams("criterio");
+        Integer id = Integer.valueOf(request.queryParams("id"));
+
+        if (criterio.equals("consumidor")){
+            trabajos = repoTrabajos.buscarTrabajosPorConsumidor(id);
+        }
+        else {
+            trabajos = repoTrabajos.buscarTrabajosPorPrestador(id);
+        }
+        
         List<TrabajoDto> trabajosDto = trabajos.stream().map(TrabajoDto::new).collect(Collectors.toList());
 
         Gson gson = new Gson();
