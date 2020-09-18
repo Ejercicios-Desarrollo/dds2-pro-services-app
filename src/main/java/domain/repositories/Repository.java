@@ -1,11 +1,14 @@
 package domain.repositories;
 
+import domain.repositories.daos.EntityManagerHelper;
 import domain.repositories.daos.IDAO;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public class Repository<T> {
-    private IDAO<T> dao;
-    private Class<T> classToManage;
+    protected IDAO<T> dao;
+    protected Class<T> classToManage;
 
     public Repository(IDAO<T> dao, Class<T> classToManage) {
         this.dao = dao;
@@ -38,5 +41,9 @@ public class Repository<T> {
 
     public void insert(T object){
         this.dao.insert(object);
+    }
+
+    public CriteriaBuilder criteriaBuilder(){
+        return EntityManagerHelper.getEntityManager().getCriteriaBuilder();
     }
 }

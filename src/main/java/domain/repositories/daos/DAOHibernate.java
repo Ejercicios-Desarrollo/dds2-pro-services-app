@@ -1,5 +1,7 @@
 package domain.repositories.daos;
 
+import domain.repositories.BusquedaCondicional;
+
 import javax.persistence.Query;
 import java.util.List;
 
@@ -16,6 +18,13 @@ public class DAOHibernate implements IDAO{
     public Object find(int id, Class clase) {
         Object o = EntityManagerHelper.entityManager().find(clase, id);
         return o;
+    }
+
+    @Override
+    public List<Object> find(BusquedaCondicional condicional) {
+        return (List<Object>) EntityManagerHelper.getEntityManager()
+                .createQuery(condicional.getCondicionCriterio())
+                .getResultList();
     }
 
     @Override

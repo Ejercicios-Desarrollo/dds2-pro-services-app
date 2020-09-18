@@ -34,9 +34,10 @@ public class CrearElementosDB {
         repositorioDeServicios.insert(mantenimientoDeJardin);
 
         EstadoTrabajo enEspera = new EstadoTrabajo("En espera de confirmación");
+        EstadoTrabajo confirmado = new EstadoTrabajo("Confirmado");
         Repository<EstadoTrabajo> repositorioEstadoTrabajo = new Repository<>(new DAOHibernate(), EstadoTrabajo.class);
         repositorioEstadoTrabajo.insert(enEspera);
-        repositorioEstadoTrabajo.insert(new EstadoTrabajo("Confirmado"));
+        repositorioEstadoTrabajo.insert(confirmado);
         repositorioEstadoTrabajo.insert(new EstadoTrabajo("Rechazado"));
         repositorioEstadoTrabajo.insert(new EstadoTrabajo("No realizado"));
         repositorioEstadoTrabajo.insert(new EstadoTrabajo("Realizado"));
@@ -56,6 +57,10 @@ public class CrearElementosDB {
         melisaContreras.setUsuario(2);
         repositorioDeConsumidores.insert(melisaContreras);
 
+        Consumidor juanLopez = new Consumidor("Juan", "Lopez");
+        melisaContreras.setUsuario(3);
+        repositorioDeConsumidores.insert(juanLopez);
+
         Repository<Trabajo> repositorioDeTrabajos = new Repository<>(new DAOHibernate(), Trabajo.class);
         Trabajo trabajo = new Trabajo(melisaContreras, joseCastillo);
         //trabajo.agregarTareas(cargaDeGas);
@@ -65,5 +70,14 @@ public class CrearElementosDB {
         trabajo.setHoraFin(LocalTime.of(10,0,0,0));
         trabajo.setEstado(enEspera);
         repositorioDeTrabajos.insert(trabajo);
+
+        Trabajo trabajo2 = new Trabajo(juanLopez, joseCastillo);
+        //trabajo.agregarTareas(cargaDeGas);
+        //trabajo.setLugar("Avenida del Libertador 3580 CABA");
+        trabajo2.setFecha(LocalDate.of(2020,11,15));
+        trabajo2.setHoraInicio(LocalTime.of(14,0,0,0));
+        trabajo2.setHoraFin(LocalTime.of(18,0,0,0));
+        trabajo2.setEstado(confirmado);
+        repositorioDeTrabajos.insert(trabajo2);
     }
 }
