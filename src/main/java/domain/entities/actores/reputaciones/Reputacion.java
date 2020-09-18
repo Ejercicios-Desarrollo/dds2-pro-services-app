@@ -16,6 +16,10 @@ public abstract class Reputacion extends Persistente {
     @JoinColumn(name = "prestador_id")
     protected Prestador prestador;
 
+    public Reputacion(){
+
+    }
+
     public Reputacion(Prestador prestador) {
         this.prestador = prestador;
     }

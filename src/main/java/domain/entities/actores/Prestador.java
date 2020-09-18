@@ -62,7 +62,7 @@ public class Prestador extends Persistente {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "prestador")
     private List<Trabajo> trabajosRealizados;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Reputacion reputacion;
 
     public Prestador(){
@@ -201,5 +201,9 @@ public class Prestador extends Persistente {
     public void recibirCalificacion(Calificacion calificacion){
         this.calificaciones.add(calificacion);
         this.reputacion.recibirCalificacion(calificacion);
+    }
+
+    public Integer getUsuario() {
+        return usuario;
     }
 }

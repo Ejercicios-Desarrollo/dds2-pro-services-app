@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 @DiscriminatorValue("buena")
 public class ReputacionBuena extends Reputacion {
 
+    public ReputacionBuena(){
+    }
+
     public ReputacionBuena(Prestador prestador) {
         super(prestador);
     }

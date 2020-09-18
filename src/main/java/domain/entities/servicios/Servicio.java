@@ -13,7 +13,7 @@ public class Servicio extends Persistente {
     @Column
     private String nombre;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "servicio_id")
     private List<Tarea> tareas;
 

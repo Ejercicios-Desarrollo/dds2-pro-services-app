@@ -41,7 +41,7 @@ public class Trabajo extends Persistente {
     @Column(columnDefinition = "TIME")
     private LocalTime horaFin;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Tarea> tareas;
 
     @ManyToOne
@@ -92,6 +92,10 @@ public class Trabajo extends Persistente {
         return tareas;
     }
 
+    public void agregarTareas(Tarea tarea){
+        this.tareas.add(tarea);
+    }
+
     public EstadoTrabajo getEstado() {
         return estado;
     }
@@ -110,5 +114,25 @@ public class Trabajo extends Persistente {
 
     public Integer cantSemanasHastaFechaActual(){
         return (int) getFechaDeSolicitud().until(LocalDate.now(), ChronoUnit.WEEKS);
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public void setHoraFin(LocalTime horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public Boolean getTrabajoAceptado() {
+        return trabajoAceptado;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
     }
 }

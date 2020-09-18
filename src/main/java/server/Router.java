@@ -32,8 +32,9 @@ public class Router {
         Spark.before("/api/*", ((request, response) -> response.type("application/json")));
 
         Spark.get("/api/servicios", ServicioRestController::listar);
-        // Spark.get(/api/servicio/:id, ServicioRestController::detalle);
+        Spark.get("/api/servicio/:id", ServicioRestController::detalle);
 
+        //Spark.get("/api/prestador/:id", PrestadorRestController::detalle);
         Spark.get("/api/prestador", PrestadorRestController::detalle);
         Spark.put("/api/prestador", PrestadorRestController::modificar);
 
