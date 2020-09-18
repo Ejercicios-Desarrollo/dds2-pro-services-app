@@ -1,6 +1,7 @@
 package domain.repositories;
 
 import domain.entities.trabajos.Trabajo;
+import domain.repositories.daos.BusquedaCondicional;
 import domain.repositories.daos.IDAO;
 
 import javax.persistence.criteria.CriteriaBuilder;

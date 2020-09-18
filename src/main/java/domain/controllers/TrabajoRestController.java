@@ -28,7 +28,7 @@ public class TrabajoRestController {
         else {
             trabajos = repoTrabajos.buscarTrabajosPorPrestador(id);
         }
-        
+
         List<TrabajoDto> trabajosDto = trabajos.stream().map(TrabajoDto::new).collect(Collectors.toList());
 
         Gson gson = new Gson();

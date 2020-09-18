@@ -1,4 +1,4 @@
-package domain.repositories;
+package domain.repositories.daos;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.function.Predicate;

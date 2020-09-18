@@ -1,7 +1,5 @@
 package domain.repositories.daos;
 
-import domain.repositories.BusquedaCondicional;
-
 import java.util.List;
 
 public interface IDAO<T> {

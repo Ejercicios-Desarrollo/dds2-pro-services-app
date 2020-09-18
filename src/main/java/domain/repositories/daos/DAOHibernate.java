@@ -1,7 +1,5 @@
 package domain.repositories.daos;
 
-import domain.repositories.BusquedaCondicional;
-
 import javax.persistence.Query;
 import java.util.List;
 

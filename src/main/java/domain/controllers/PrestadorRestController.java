@@ -10,7 +10,7 @@ import spark.Response;
 
 public class PrestadorRestController extends BaseController{
     public static String detalle(Request request, Response response){
-        Integer idUsuario = new Integer(request.queryParams("id"));
+        Integer idUsuario = new Integer(request.params("id"));
         Repository<Prestador> repoPrestadores = new Repository<>(new DAOHibernate(), Prestador.class);
 
         /*
